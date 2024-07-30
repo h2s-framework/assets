@@ -1,0 +1,39 @@
+id: Siarko.H2s.Assets.default
+module: Assets
+
+plugins:
+  \Siarko\BlockLayout\Definitions\Builtin\AbstractLinkedTag:
+    class: \Siarko\Assets\Plugin\BlockLayout\Parser\LinkedTagPlugin
+types:
+  \Siarko\Assets\Api\AssetInterface: \Siarko\Assets\Asset
+  \Siarko\Assets\Api\AssetIdConverterInterface: \Siarko\Assets\AssetIdConverter
+  \Siarko\Assets\Api\AssetUrlProviderInterface: \Siarko\Assets\AssetUrlProvider
+
+  \Siarko\Assets\Api\Deploy\DeployerInterface: \Siarko\Assets\Deploy\AssetDeployer
+  V\Siarko\Assets\Deploy\PathProvider: !new \Siarko\Paths\Provider\ProjectPathProvider
+  V\Siarko\Assets\Deploy\Directory: !new \Siarko\Files\Api\DirectoryInterface
+  \Siarko\Assets\Api\Deploy\DeploymentStrategyPoolInterface: \Siarko\Assets\Deploy\DeploymentStrategyPool
+  \Siarko\Assets\Api\Deploy\DeploymentStrategyManagerInterface: \Siarko\Assets\Deploy\DeploymentStrategyManager
+
+  \Siarko\Assets\Api\Provide\AssetProviderInterface: \Siarko\Assets\Provide\AssetProvider
+  \Siarko\Assets\Api\Provide\AssetIdProviderInterface: \Siarko\Assets\Provide\AssetIdProvider
+  \Siarko\Assets\Api\Provide\AssetServerInterface: \Siarko\Assets\Provide\AssetServer
+
+arguments:
+  V\Siarko\Assets\Deploy\PathProvider:
+    path: 'pub/assets'
+  V\Siarko\Assets\Deploy\Directory:
+    pathProvider: V\Siarko\Assets\Deploy\PathProvider
+  \Siarko\Assets\Provide\AssetProvider:
+    assetsDirectory: V\Siarko\Assets\Deploy\Directory
+  \Siarko\Assets\Deploy\AssetDeployer:
+    targetDirectory: V\Siarko\Assets\Deploy\Directory
+  \Siarko\Assets\Deploy\DeploymentStrategyPool:
+    strategies:
+      - \Siarko\Assets\Deploy\Strategy\Copy
+      - \Siarko\Assets\Deploy\Strategy\Link
+
+  # Block layout extension
+  \Siarko\BlockLayout\Template\ContextualLoader:
+    callHandlers:
+      getAssetUrl: \Siarko\Assets\BlockLayout\Template\CallHandler\AssetFetchHandler
