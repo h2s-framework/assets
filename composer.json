@@ -11,9 +11,6 @@
       "email": "mateusz@siarko.pl"
     }
   ],
-  "bin": [
-    "src/bin/static.php"
-  ],
   "autoload": {
     "psr-4": {
       "Siarko\\Assets\\": "src/"

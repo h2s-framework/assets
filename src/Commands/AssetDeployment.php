@@ -13,7 +13,7 @@ class AssetDeployment extends Command
      */
     protected function configure(): void
     {
-        $this->setName('assets:deploy')
+        $this->setName('deploy:assets')
             ->setDescription("Deploy static assets to public directory");
     }
 
