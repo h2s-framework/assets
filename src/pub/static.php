@@ -12,7 +12,7 @@ if(file_exists($GLOBALS['_composer_autoload_path'])){
     die("APPLICATION AUTOLOADER NOT FOUND!");
 }
 
-$projectRoot = dirname(dirname($GLOBALS['_composer_bin_dir']));
+$projectRoot = dirname(dirname($GLOBALS['_composer_autoload_path']));
 
 \Siarko\Api\State\Scope\ScopeProviderRegistry::setScope('static');
 $bootstrap = new Siarko\Bootstrap\Bootstrap($projectRoot);
