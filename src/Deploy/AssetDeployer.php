@@ -34,7 +34,7 @@ class AssetDeployer implements DeployerInterface
     {
         $deployPath = $this->assetIdConverter->getLocalPathFromId($assetId);
         $localPath = $this->assetIdConverter->getModulePathFromId($assetId);
-        $this->copyAsset($localPath, $deployPath);
+        $this->deployAsset($localPath, $deployPath);
     }
 
     /**
@@ -42,7 +42,7 @@ class AssetDeployer implements DeployerInterface
      * @param string $deployLocalPath
      * @return void
      */
-    private function copyAsset(string $absolutePath, string $deployLocalPath): void
+    private function deployAsset(string $absolutePath, string $deployLocalPath): void
     {
         $newDirectory = $this->targetDirectory->subdirectory(dirname($deployLocalPath));
         $file = $this->fileFactory->create();

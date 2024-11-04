@@ -2,8 +2,7 @@ id: Siarko.H2s.Assets.default
 module: Assets
 
 plugins:
-  \Siarko\BlockLayout\Definitions\Builtin\AbstractLinkedTag:
-    class: \Siarko\Assets\Plugin\BlockLayout\Parser\LinkedTagPlugin
+  \Siarko\BlockLayout\Definitions\Builtin\AbstractLinkedTag: \Siarko\Assets\Plugin\BlockLayout\Parser\LinkedTagPlugin
 types:
   \Siarko\Assets\Api\AssetInterface: \Siarko\Assets\Asset
   \Siarko\Assets\Api\AssetIdConverterInterface: \Siarko\Assets\AssetIdConverter

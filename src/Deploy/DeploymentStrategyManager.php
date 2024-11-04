@@ -16,10 +16,12 @@ class DeploymentStrategyManager implements DeploymentStrategyManagerInterface
     /**
      * @param DeploymentStrategyPoolInterface $strategyPool
      * @param AppState $appState
+     * @param string $overrideStrategy
      */
     public function __construct(
         private readonly DeploymentStrategyPoolInterface $strategyPool,
-        private readonly AppState $appState
+        private readonly AppState $appState,
+        private readonly string $overrideStrategy = ''
     )
     {
     }
@@ -29,6 +31,9 @@ class DeploymentStrategyManager implements DeploymentStrategyManagerInterface
      */
     public function getStrategyDecision(): DeploymentStrategyInterface
     {
+        if(!empty($this->overrideStrategy)){
+            return $this->strategyPool->getStrategy($this->overrideStrategy);
+        }
         return match ($this->appState->getAppMode()) {
             AppMode::DEV => $this->strategyPool->getStrategy(Link::class),
             default => $this->strategyPool->getStrategy(Copy::class),
