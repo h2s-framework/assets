@@ -1,8 +1,6 @@
 id: Siarko.H2s.Assets.default
 module: Assets
 
-plugins:
-  \Siarko\BlockLayout\Definitions\Builtin\AbstractLinkedTag: \Siarko\Assets\Plugin\BlockLayout\Parser\LinkedTagPlugin
 types:
   \Siarko\Assets\Api\AssetInterface: \Siarko\Assets\Asset
   \Siarko\Assets\Api\AssetIdConverterInterface: \Siarko\Assets\AssetIdConverter
@@ -17,6 +15,11 @@ types:
   \Siarko\Assets\Api\Provide\AssetProviderInterface: \Siarko\Assets\Provide\AssetProvider
   \Siarko\Assets\Api\Provide\AssetIdProviderInterface: \Siarko\Assets\Provide\AssetIdProvider
   \Siarko\Assets\Api\Provide\AssetServerInterface: \Siarko\Assets\Provide\AssetServer
+
+  # logs
+  V\AssetLogger: !new \Monolog\Logger
+  V\AssetLogger\Handler: !new \Monolog\Handler\StreamHandler
+  V\AssetLogger\PathProvider: !new \Siarko\Paths\Provider\StaticFileProjectPathProvider
 
 arguments:
   V\Siarko\Assets\Deploy\PathProvider:
@@ -36,3 +39,16 @@ arguments:
   \Siarko\BlockLayout\Template\ContextualLoader:
     callHandlers:
       getAssetUrl: \Siarko\Assets\BlockLayout\Template\CallHandler\AssetFetchHandler
+
+  \Siarko\Assets\App\StaticContentApp:
+    logger: V\AssetLogger
+
+  # Logs
+  V\AssetLogger\PathProvider:
+    path: var/log/core.assets.log
+  V\AssetLogger\Handler:
+    stream: !type:provider V\AssetLogger\PathProvider::getConstructedPath
+  V\AssetLogger:
+    name: asset
+    handlers:
+      - !type:object V\AssetLogger\Handler

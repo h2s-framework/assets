@@ -123,7 +123,7 @@ class AssetIdConverter implements AssetIdConverterInterface
         if(empty($moduleId) || empty($assetPath)){
             throw new AssetPathNotFoundException($id);
         }
-        $moduleId = Strings::camelCaseToSnakeCase($moduleId);
+        $moduleId = $this->normalizeModuleId($moduleId);
         return Strings::createUrl([self::MODULE_PREFIX, $moduleId, $assetPath]);
     }
 
@@ -138,7 +138,12 @@ class AssetIdConverter implements AssetIdConverterInterface
         if(empty($moduleId) || empty($assetPath)){
             throw new AssetPathNotFoundException($id);
         }
-        $moduleId = Strings::camelCaseToSnakeCase(str_replace('.', '_', $moduleId));
+        $moduleId = $this->normalizeModuleId($moduleId);
         return Strings::createPath([self::MODULE_PREFIX, $moduleId, Strings::urlToPath($assetPath)]);
+    }
+
+    private function normalizeModuleId(string $id): string
+    {
+        return Strings::camelCaseToSnakeCase($id);
     }
 }

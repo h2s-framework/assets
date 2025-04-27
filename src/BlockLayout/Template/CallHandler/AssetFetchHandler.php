@@ -3,7 +3,7 @@
 namespace Siarko\Assets\BlockLayout\Template\CallHandler;
 
 use Siarko\Assets\Api\AssetUrlProviderInterface;
-use Siarko\BlockLayout\Template\CallHandler\CallHandlerInterface;
+use Siarko\BlockLayout\Api\Template\CallHandlerInterface;
 class AssetFetchHandler implements CallHandlerInterface
 {
 

@@ -16,6 +16,7 @@ class AssetServer implements AssetServerInterface
     {
         $mime = $asset->getMimeType();
         header('Content-Type: '.$mime);
+        header('Cache-Control: no-store, no-cache, max-age=0');
         readfile($asset->getFile()->getPath());
     }
 
@@ -24,7 +25,7 @@ class AssetServer implements AssetServerInterface
      */
     public function serveAssetNotFound(): void
     {
-        header('HTTP/1.0 404 Not Found');
-        echo '404 Not Found';
+        http_response_code(404);
+        echo '404 Asset Not Found';
     }
 }
