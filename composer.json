@@ -10,6 +10,13 @@
       "email": "mateusz@siarko.pl"
     }
   ],
+  "require": {
+    "h2sf/url-service": "^3.0",
+    "h2sf/utils": "^3.0",
+    "h2sf/api": "^3.0",
+    "h2sf/path-manager": "^3.0",
+    "h2sf/file-abstraction": "^3.0"
+  },
   "autoload": {
     "psr-4": {
       "Siarko\\Assets\\": "src/"
